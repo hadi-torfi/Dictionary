@@ -3,6 +3,7 @@ package com.haditorfi.dictionary.feature.di
 import android.app.Application
 import androidx.room.Room
 import com.google.gson.Gson
+import com.haditorfi.dictionary.feature.data.local.Converters
 import com.haditorfi.dictionary.feature.data.local.WordInfoDatabase
 import com.haditorfi.dictionary.feature.data.remote.DictionaryApi
 import com.haditorfi.dictionary.feature.data.repository.WordInfoRepositoryImpl
@@ -42,7 +43,7 @@ object WordInfoModule {
         return Room.databaseBuilder(
             app, WordInfoDatabase::class.java, "word_db"
         )
-            .addTypeConverter(GsonParser(Gson()))
+            .addTypeConverter(Converters(GsonParser(Gson())))
             .build()
     }
 
@@ -54,6 +55,5 @@ object WordInfoModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(DictionaryApi::class.java)
-
     }
 }

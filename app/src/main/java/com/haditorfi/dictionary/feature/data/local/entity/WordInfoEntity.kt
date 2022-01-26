@@ -7,18 +7,18 @@ import com.haditorfi.dictionary.feature.domain.model.WordInfo
 
 @Entity
 data class WordInfoEntity(
-    val meanings: List<Meaning>,
-    val origin: String,
-    val phonetic: String,
     val word: String,
+    val phonetic: String?,
+    val origin: String?,
+    val meanings: List<Meaning>,
     @PrimaryKey val id: Int? = null
 ) {
     fun toWordInfo(): WordInfo {
         return WordInfo(
-            meanings = meanings,
-            origin = origin,
+            word = word,
             phonetic = phonetic,
-            word = word
+            origin = origin,
+            meanings = meanings
         )
     }
 }
